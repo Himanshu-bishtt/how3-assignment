@@ -1,5 +1,36 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import Product from "../components/Product/product";
 
-export default function ProductList() {
-  return <h1 className="text-2xl font-bold">Products Page</h1>;
+interface ProductsType {
+  status: string;
+  data: [];
+}
+
+async function getProducts() {
+  const res = await fetch("http://localhost:3000/products/api");
+  return await res.json();
+}
+
+export default async function ProductList() {
+  const products = await getProducts();
+
+  return (
+    <div>
+      <h1 className="text-2xl font-bold">Products Page</h1>
+
+      <div className="grid grid-cols-4">
+        {products.data.map((product: any) => (
+          <Product
+            key={product.id}
+            id={product.id}
+            image={product.image}
+            title={product.title}
+            rating={product.rating}
+            category={product.category}
+            price={product.price}
+          />
+        ))}
+      </div>
+    </div>
+  );
 }
