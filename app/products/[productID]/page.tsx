@@ -40,7 +40,7 @@ export default async function ProductDetail({
         />
         <div className="flex flex-col gap-2 bg-slate-100 shadow rounded-md py-12 px-8">
           <div className="bg-green-600 text-white font-bold text-sm self-start px-2 rounded-lg">
-            Category
+            {product.data.category}
           </div>
           <h3 className="text-lg font-bold">{product.data.title}</h3>
           <div className="flex gap-2 items-center text-sm font-bold mt-2">

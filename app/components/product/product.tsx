@@ -1,6 +1,9 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import { motion } from "framer-motion";
 
 interface ProductType {
   id: number;
@@ -20,7 +23,11 @@ export default function Product({
   image,
 }: ProductType) {
   return (
-    <figure className="border m-4 rounded-lg flex flex-col gap-2 p-4 overflow-hidden">
+    <motion.div
+      whileHover={{ scale: 1.05 }}
+      animate={{ x: [0, 50, 0] }}
+      className="border m-4 rounded-lg flex flex-col gap-2 p-4 overflow-hidden"
+    >
       <Image
         src={image}
         alt={title}
@@ -44,6 +51,6 @@ export default function Product({
         </div>
         <div>({rating.count})</div>
       </div>
-    </figure>
+    </motion.div>
   );
 }
