@@ -1,18 +1,19 @@
-import React from "react";
+"use client";
+
+import React, { useEffect, useState } from "react";
 import Product from "../components/product/product";
 
-interface ProductsType {
-  status: string;
-  data: [];
-}
+export default function ProductList() {
+  const [products, setProducts] = useState([]);
 
-async function getProducts() {
-  const res = await fetch("http://localhost:3000/products/api");
-  return await res.json();
-}
-
-export default async function ProductList() {
-  const products = await getProducts();
+  useEffect(() => {
+    async function getProducts() {
+      const res = await fetch("https://fakestoreapi.com/products");
+      const data = await res.json();
+      setProducts(data);
+    }
+    getProducts();
+  }, []);
 
   return (
     <div>
@@ -21,7 +22,7 @@ export default async function ProductList() {
       </h1>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-        {products.data.map((product: any) => (
+        {products.map((product: any) => (
           <Product
             key={product.id}
             id={product.id}
@@ -30,6 +31,7 @@ export default async function ProductList() {
             rating={product.rating}
             category={product.category}
             price={product.price}
+            description={product.description}
           />
         ))}
       </div>

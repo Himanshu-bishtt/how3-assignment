@@ -34,6 +34,7 @@ export default async function RelatedProducts({
             title={product.title}
             rating={product.rating}
             category={product.category}
+            description={product.description}
             price={product.price}
           />
         ))}

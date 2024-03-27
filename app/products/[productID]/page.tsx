@@ -1,6 +1,6 @@
 import RelatedProducts from "@/app/components/product/related-product";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect } from "react";
 
 interface ProductDetailProps {
   productID: string;
@@ -8,7 +8,7 @@ interface ProductDetailProps {
 
 async function getProductByID(id: string) {
   try {
-    const res = await fetch(`http://localhost:3000/products/${id}/api`);
+    const res = await fetch(`https://fakestoreapi.com/products/${id}`);
     const data = await res.json();
     return data;
   } catch (error) {
@@ -31,8 +31,8 @@ export default async function ProductDetail({
 
       <div className="grid grid-cols-1 lg:grid-cols-2 justify-center items-center gap-8 p-8">
         <Image
-          src={product.data.image}
-          alt={product.data.title}
+          src={product.image}
+          alt={product.title}
           width={500}
           height={500}
           priority
@@ -40,31 +40,30 @@ export default async function ProductDetail({
         />
         <div className="flex flex-col gap-2 bg-slate-100 shadow rounded-md py-12 px-8">
           <div className="bg-green-600 text-white font-bold text-sm self-start px-2 rounded-lg">
-            {product.data.category}
+            {product.category}
           </div>
-          <h3 className="text-lg font-bold">{product.data.title}</h3>
+          <h3 className="text-lg font-bold">{product.title}</h3>
           <div className="flex gap-2 items-center text-sm font-bold mt-2">
             <div className="bg-slate-800 text-white text-xs p-1 px-2 rounded-lg">
-              ⭐ {product.data.rating.rate}
+              ⭐ {product.rating.rate}
             </div>
-            <div>({product.data.rating.count})</div>
+            <div>({product.rating.count})</div>
           </div>
           <div className="text-sm mt-4">
             Price:
             <span className="text-red-800 font-bold text-lg">
-              ${product.data.price}
+              ${product.price}
             </span>
           </div>
           <div className="mt-4 text-slate-600 leading-8">
-            {product.data.description}
+            {product.description}
           </div>
           <div className="mt-4">
             <div>
-              ID: <span className="font-bold">{product.data.id}</span>
+              ID: <span className="font-bold">{product.id}</span>
             </div>
             <div>
-              Category:{" "}
-              <span className="font-bold">{product.data.category}</span>
+              Category: <span className="font-bold">{product.category}</span>
             </div>
           </div>
 
@@ -86,7 +85,7 @@ export default async function ProductDetail({
         </div>
       </div>
 
-      <RelatedProducts category={product.data.category} />
+      <RelatedProducts category={product.category} />
     </div>
   );
 }

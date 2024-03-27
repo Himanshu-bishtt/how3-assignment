@@ -5,11 +5,12 @@ import Link from "next/link";
 import React from "react";
 import { motion } from "framer-motion";
 
-interface ProductType {
+export interface ProductType {
   id: number;
   title: string;
   price: number;
   category: string;
+  description: string;
   image: string;
   rating: { rate: number; count: number };
 }
