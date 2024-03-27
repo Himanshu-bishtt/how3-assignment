@@ -51,7 +51,7 @@ export default async function ProductDetail({
           </div>
           <div className="text-sm mt-4">
             Price:
-            <span className="text-red-800 font-bold text-lg">
+            <span className="text-rose-500 font-bold text-lg">
               ${product.price}
             </span>
           </div>

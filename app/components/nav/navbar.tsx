@@ -9,7 +9,7 @@ const NavLinks = [
 export default function Navbar() {
   return (
     <header className="flex justify-around items-center bg-slate-50 shadow py-8">
-      <div>LOGO</div>
+      <div className="font-bold">LOGO</div>
       <ul className="flex gap-4 font-bold">
         {NavLinks.map((link) => {
           return (

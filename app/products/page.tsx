@@ -1,19 +1,18 @@
-"use client";
-
 import React, { useEffect, useState } from "react";
 import Product from "../components/product/product";
 
-export default function ProductList() {
-  const [products, setProducts] = useState([]);
+async function getProducts() {
+  try {
+    const res = await fetch(`https://fakestoreapi.com/products`);
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+}
 
-  useEffect(() => {
-    async function getProducts() {
-      const res = await fetch("https://fakestoreapi.com/products");
-      const data = await res.json();
-      setProducts(data);
-    }
-    getProducts();
-  }, []);
+export default async function ProductList() {
+  const products = await getProducts();
 
   return (
     <div>
